@@ -24,7 +24,7 @@ const App = () => {
 
   const removeCart = (item) => {
     const exists = cartItems.find((product) => product.id === item.id);
-    if (exists.quantity == 1) {
+    if (exists.quantity === 1) {
       setCartItems(cartItems.filter((product) => product.id !== item.id));
     } else {
       setCartItems(
@@ -35,6 +35,11 @@ const App = () => {
         )
       );
     }
+  };
+
+  const onCheckOut = () => {
+    alert("Thanks for Shopping");
+    setCartItems([]);
   };
 
   return (
@@ -50,7 +55,11 @@ const App = () => {
             />
           </div>
           <div className="col-sm-4">
-            <Cart cartItems={cartItems} removeCart={removeCart} />
+            <Cart
+              cartItems={cartItems}
+              removeCart={removeCart}
+              onCheckOut={onCheckOut}
+            />
           </div>
         </div>
       </div>
