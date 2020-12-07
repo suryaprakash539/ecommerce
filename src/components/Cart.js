@@ -1,6 +1,6 @@
 import React from "react";
 
-const Cart = ({ cartItems }) => {
+const Cart = ({ cartItems, removeCart }) => {
   const totalPrice = cartItems.reduce(function (total, item) {
     return total + item.quantity * item.price;
   }, 0);
@@ -11,13 +11,19 @@ const Cart = ({ cartItems }) => {
         <div className="jumbotron jumbotron-fluid border border-success rounded">
           <h3 className="ml-2">Cart Items</h3>
           <hr />
-          <div class="d-flex flex-column  ">
+          <div class="d-flex flex-column ">
             {cartItems.map((item) => (
               <div
                 key={item.id}
                 className="d-flex justify-content-between align-items-center"
               >
                 <p className="ml-2">{item.name}</p>
+                <button
+                  className="btn btn-danger align-center ml-2"
+                  onClick={() => removeCart(item)}
+                >
+                  Remove -
+                </button>
                 <p className="mr-2">
                   {item.quantity} X {item.price} = {item.quantity * item.price}
                 </p>

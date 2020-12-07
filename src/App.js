@@ -18,8 +18,22 @@ const App = () => {
         )
       );
     } else {
-      item.quantity = item.quantity + 1;
-      setCartItems([...cartItems, item]);
+      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+    }
+  };
+
+  const removeCart = (item) => {
+    const exists = cartItems.find((product) => product.id === item.id);
+    if (exists.quantity == 1) {
+      setCartItems(cartItems.filter((product) => product.id !== item.id));
+    } else {
+      setCartItems(
+        cartItems.map((product) =>
+          product.id === item.id
+            ? { ...exists, quantity: exists.quantity - 1 }
+            : product
+        )
+      );
     }
   };
 
@@ -29,10 +43,14 @@ const App = () => {
       <div className="container-fluid mt-3">
         <div className="row">
           <div className="col-sm-8">
-            <Products products={data.products} addToCart={addToCart} />
+            <Products
+              products={data.products}
+              addToCart={addToCart}
+              removeCart={removeCart}
+            />
           </div>
           <div className="col-sm-4">
-            <Cart cartItems={cartItems} />
+            <Cart cartItems={cartItems} removeCart={removeCart} />
           </div>
         </div>
       </div>
