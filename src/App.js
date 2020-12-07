@@ -8,14 +8,15 @@ const App = () => {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (item) => {
-    const itemAlreadyPresent = cartItems.find(
-      (product) => product.id === item.id
-    )
-      ? true
-      : false;
-
-    if (itemAlreadyPresent) {
-      alert("item already added to cart");
+    const exists = cartItems.find((product) => product.id === item.id);
+    if (exists) {
+      setCartItems(
+        cartItems.map((item) =>
+          item.id === exists.id
+            ? { ...exists, quantity: exists.quantity + 1 }
+            : item
+        )
+      );
     } else {
       item.quantity = item.quantity + 1;
       setCartItems([...cartItems, item]);
