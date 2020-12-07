@@ -2,7 +2,7 @@ import React from "react";
 
 const Product = ({ product }) => {
   return (
-    <div className="card" style={{ width: "18rem" }}>
+    <div className="card" style={{ width: "15rem" }}>
       <img
         src={product.image}
         style={{ height: "200px" }}
